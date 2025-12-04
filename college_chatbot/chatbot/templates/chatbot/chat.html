@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Inquiry Chatbot</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/bot.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/user.png' %}">
+</head>
+<body>
+    <div class="container">
+        <div id="chat-container">
+            <div id="chat-log"></div>
+        </div>
+        <div id="input-area">
+            <input type="text" id="message-input" placeholder="Ask a question...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+    
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                appendMessage('user-message', message);
+                messageInput.value = '';
+    
+                fetch('get_response/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': getCookie('csrftoken') // Important for Django security
+                    },
+                    body: `message=${encodeURIComponent(message)}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.response) {
+                        appendMessage('bot-message', data.response);
+                        // You can further process the bot's response here
+                    } else if (data.error) {
+                        appendMessage('bot-message', `Error: ${data.error}`);
+                    }
+                })
+                .catch(error => {
+                    appendMessage('bot-message', 'Error communicating with the server.');
+                    console.error('Error:', error);
+                });
+            }
+        }
+    
+        function appendMessage(className, text) {
+            const messageWrapper = document.createElement('div');
+            messageWrapper.classList.add('message-wrapper', className);
+        
+            const img = document.createElement('img');
+            img.classList.add('avatar');
+            img.src = className === 'user-message' 
+                ? "{% static 'images/user.png' %}" 
+                : "{% static 'images/bot.png' %}";
+        
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+        
+            const linkify = (inputText) => {
+                return inputText.replace(/(https?:\/\/[\w\-\.]+\.[\w]{2,6}[^\s]*)/g, '<a href="$1" target="_blank">$1</a>');
+            };
+        
+            if (text.includes("```")) {
+                const codeContent = text.match(/```(?:\w+)?([\s\S]*?)```/);
+                if (codeContent) {
+                    const pre = document.createElement('pre');
+                    const code = document.createElement('code');
+                    code.textContent = codeContent[1].trim();
+                    pre.appendChild(code);
+                    messageDiv.appendChild(pre);
+                }
+            } else {
+                let formattedText = text
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<li>$1</li>')
+                    .replace(/\n/g, '<br>');
+        
+                if (formattedText.includes('<li>')) {
+                    formattedText = formattedText.replace(/(<li>.*<\/li>)/gms, '<ul>$1</ul>');
+                }
+        
+                formattedText = linkify(formattedText);
+                messageDiv.innerHTML = formattedText;
+            }
+        
+            messageWrapper.appendChild(img);
+            messageWrapper.appendChild(messageDiv);
+            chatLog.appendChild(messageWrapper);
+        
+            setTimeout(() => {
+                chatLog.scrollTop = chatLog.scrollHeight;
+            }, 30);
+        }
+        
+    
+        // Function to get the CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = cookies[i].trim();
+                    if (cookie.startsWith(name + '=')) {
+                        cookieValue = cookie.substring(name.length + 1);
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+</body>
+</html>
