@@ -62,19 +62,14 @@ myproject/
 ## ⚙️ Setup Guide
 
 ### 1️⃣ Clone the project
-git clone <your-repo-url>
-cd College-Inquiry-Chatbot
-
-shell
-Copy code
+git clone <https://github.com/parthugari-shivakoti/chatbot-proj/>
+cd college_chatbot
 
 ### 2️⃣ Create & activate virtual environment
 python -m venv venv
-venv\Scripts\activate (Windows)
-source venv/bin/activate (Mac / Linux)
+venv\Scripts\activate (Windows))
 
 shell
-Copy code
 
 ### 3️⃣ Install Dependencies
 pip install -r requirements.txt
@@ -101,13 +96,9 @@ python manage.py runserver
 Open in browser: 👉 http://127.0.0.1:8000/
 
 🔍 Example Queries You Can Ask
-“Show colleges in Surat”
+"give me faculty details?"
 
-“Which colleges have CSE?”
-
-“Fees below 50,000 in Ahmedabad?”
-
-“Any colleges with concession available?”
+"give me textbooks for CSE"
 
 The chatbot understands real language 🔥
 
@@ -118,8 +109,6 @@ The chatbot understands real language 🔥
 🔮 Future Enhancements (Optional)
 Add login & admin panel
 
-Show college images & website links
-
 Ranking & placement information
 
 Provide direct Apply Now buttons
@@ -127,7 +116,6 @@ Provide direct Apply Now buttons
 Voice interaction with microphone
 
 🧑‍💻 Author
-Your Name
-College Inquiry Chatbot Project
+P Shivakoti
+College Inquiry Chatbot Project Using AI
 If you like this project, ⭐ star the repo!
-
