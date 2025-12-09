@@ -17,11 +17,11 @@ load_dotenv()
 # Configure Gemini
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
-
+# mongodb://localhost:27017/
 # MongoDB setup
-client = MongoClient(os.getenv("MONGO_URI"))
-db = client["users"]
-collection = db["users"]
+client = MongoClient("mongodb://localhost:27017/")
+db = client["details"]
+collection = db["details_connection"]
 examples = """
 Examples:
 Q: What are the textbooks for 3rd semester CSE?
@@ -69,7 +69,7 @@ def get_response(request):
                 'text book','course structure', 'courses', 'cousre','textbooks'
             ]):
                 # Ask Gemini to generate MongoDB query
-                prompt_for_query = prompt_for_query = f"""
+                prompt_for_query = f"""
 You are a MongoDB expert helping generate queries for a college information chatbot.
 
 Each document has a 'type' and a 'data' field.
@@ -88,7 +88,7 @@ Return only the JSON query object.
 """
 
                 query_response = model.generate_content(prompt_for_query)
-                # print(f"this is query:\n{query_response}")
+                print(f"this is query:\n{query_response}")
                 # Clean and extract JSON using regex
                 raw_text = query_response.text.strip()
                 json_match = re.search(r'{.*}', raw_text, re.DOTALL)

@@ -1,0 +1,144 @@
+[
+  {
+    "type": "notebook",
+    "data": { "subject": "Physics", "department": "CSE", "link": "https://example.com/notes/physics.pdf" }
+  },
+  {
+    "type": "notebook",
+    "data": { "subject": "Operating Systems", "department": "CSD", "link": "https://example.com/os-notes" }
+  },
+  {
+    "type": "notebook",
+    "data": { "subject": "DBMS", "department": "CSE", "link": "https://example.com/dbms-notes" }
+  },
+  {
+    "type": "textbook",
+    "data": { "subject": "Mathematics", "semester": 3, "link": "https://example.com/maths-book" }
+  },
+  {
+    "type": "textbook",
+    "data": { "subject": "Java Programming", "semester": 4, "link": "https://example.com/java-textbook" }
+  },
+  {
+    "type": "textbook",
+    "data": { "subject": "Operating Systems", "semester": 5, "link": "https://example.com/os-textbook" }
+  },
+  {
+    "type": "faculty",
+    "data": {
+      "name": "Dr. Suresh",
+      "designation": "Professor",
+      "department": "CSD",
+      "experience": "10 years",
+      "research": "Machine Learning"
+    }
+  },
+  {
+    "type": "faculty",
+    "data": {
+      "name": "Ms. Priya",
+      "designation": "Assistant Professor",
+      "department": "CSE",
+      "experience": "5 years",
+      "research": "Cyber Security"
+    }
+  },
+  {
+    "type": "faculty",
+    "data": {
+      "name": "Mr. Arjun",
+      "designation": "Associate Professor",
+      "department": "IOT",
+      "experience": "7 years",
+      "research": "Embedded Systems"
+    }
+  },
+  {
+    "type": "placement",
+    "data": { "year": "2023", "students_placed": 350, "highest_package": "25 LPA" }
+  },
+  {
+    "type": "placement",
+    "data": { "year": "2022", "students_placed": 300, "highest_package": "20 LPA" }
+  },
+  {
+    "type": "courses_available",
+    "data": {
+      "departments": [
+        "CSE",
+        "CSD",
+        "CSM",
+        "IOT",
+        "ECE",
+        "EEE"
+      ]
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "name": "TechFest",
+      "date": "2024-09-10",
+      "department": "CSE",
+      "details": "Annual technical festival with coding and robotics competitions."
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "name": "AI Seminar",
+      "date": "2024-08-02",
+      "department": "CSD",
+      "details": "Seminar on Artificial Intelligence and ML trends."
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "name": "Cultural Day",
+      "date": "2024-12-06",
+      "department": "All",
+      "details": "Campus-wide cultural celebration."
+    }
+  },
+  {
+    "type": "timetable",
+    "data": {
+      "department": "CSD",
+      "semester": 4,
+      "link": "https://example.com/csd-sem4-timetable"
+    }
+  },
+  {
+    "type": "timetable",
+    "data": {
+      "department": "CSE",
+      "semester": 6,
+      "link": "https://example.com/cse-sem6-timetable"
+    }
+  },
+  {
+    "type": "address",
+    "data": {
+      "college_name": "ACE Engineering College",
+      "location": "Hyderabad, Telangana",
+      "contact": "+91 9876543210"
+    }
+  },
+  {
+    "type": "notebook",
+    "data": {
+      "subject": "Data Structures",
+      "department": "CSM",
+      "link": "https://example.com/dsa-notes"
+    }
+  },
+  {
+    "type": "textbook",
+    "data": {
+      "subject": "Computer Networks",
+      "semester": 5,
+      "link": "https://example.com/cn-book"
+    }
+  }
+]
